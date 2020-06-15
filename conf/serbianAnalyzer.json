@@ -1,0 +1,117 @@
+{
+   "index_patterns": ["scientificPaper"],
+   "settings" :{
+      "analysis":{
+         "analyzer":{
+            "default":{
+               "tokenizer":"standard",
+               "filter":[
+                  "standard",
+                  "my_ascii_folding",
+                  "lowercase"
+               ],
+               "char_filter":[
+                  "small_dj",
+                  "big_dj",
+                  "small_c1",
+                  "big_c1",
+                  "small_c2",
+                  "big_c2",
+                  "small_sh",
+                  "big_sh",
+                  "small_z",
+                  "big_z"
+               ]
+            }
+         },
+         "filter":{
+            "my_ascii_folding":{
+               "type":"asciifolding",
+               "preserve_original":true
+            }
+         },
+         "char_filter":{
+            "small_dj":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(đ)(\\S*)",
+               "replacement":"$0 $1dj$3"
+            },
+            "big_dj":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(Đ)(\\S*)",
+               "replacement":"$0 $1Dj$3"
+            },
+            "small_c1":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(ć)(\\S*)",
+               "replacement":"$0 $1c$3"
+            },
+            "big_c1":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(Ć)(\\S*)",
+               "replacement":"$0 $1C$3"
+            },
+            "small_c2":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(č)(\\S*)",
+               "replacement":"$0 $1c$3"
+            },
+            "big_c2":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(Č)(\\S*)",
+               "replacement":"$0 $1C$3"
+            },
+            "small_sh":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(š)(\\S*)",
+               "replacement":"$0 $1s$3"
+            },
+            "big_sh":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(Š)(\\S*)",
+               "replacement":"$0 $1S$3"
+            },
+            "small_z":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(ž)(\\S*)",
+               "replacement":"$0 $1z$3"
+            },
+            "big_z":{
+               "type":"pattern_replace",
+               "pattern":"(\\S*)(Ž)(\\S*)",
+               "replacement":"$0 $1Z$3"
+            }
+         }
+      }
+   },
+   "mappings": {
+      "doc": {
+         "properties": {
+            "identificationNumber": {
+               "type": "keyword"
+            },
+            "title": {
+               "type": "keyword"
+            },
+            "documentType": {
+               "type": "keyword"
+            },
+            "mentor": {
+               "type": "keyword"
+            },
+            "year": {
+               "type": "keyword"
+            },
+            "publisher": {
+               "type": "keyword"
+            },
+            "scientificField": {
+               "type": "keyword"
+            },
+            "fulltext": {
+               "type": "text"
+            }
+         }
+      }
+   }
+}
